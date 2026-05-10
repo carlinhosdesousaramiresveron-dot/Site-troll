@@ -30,7 +30,7 @@
         }
         #toast.show { top: 20px; }
 
-        #fleeing-btn { position: absolute; transition: 0.1s; z-index: 10; }
+        #fleeing-btn { position: absolute; transition: 0.2s; z-index: 10; }
         .bar-bg { width: 100%; background: #222; height: 20px; border-radius: 10px; margin: 20px 0; }
         #bar-fill { width: 0%; height: 100%; background: var(--neon); }
         .secret-click { color: var(--neon); text-decoration: underline; cursor: pointer; font-weight: bold; }
@@ -52,76 +52,67 @@
 
     <div id="level1" class="level active">
         <h1>FASE 1: O INÍCIO</h1>
-        <p>Você foi avisado. Prossiga por sua conta e risco.</p>
         <button onclick="next(2, 'O Começo')">ACESSAR SISTEMA</button>
     </div>
 
     <div id="level2" class="level">
         <h1>FASE 2: AGILIDADE</h1>
-        <p>Tente clicar no botão fujão!</p>
+        <p>Ajustado para telemóvel!</p>
         <button id="fleeing-btn">ME CLIQUE!</button>
     </div>
 
     <div id="level3" class="level">
         <h1>FASE 3: ENERGIA CINÉTICA</h1>
-        <p>99%... Preciso de força!</p>
-        <p><small>PC: Balance o mouse | Mobile: Chacoalhe o celular!</small></p>
         <div class="bar-bg"><div id="bar-fill"></div></div>
     </div>
 
     <div id="level4" class="level">
         <h1>FASE 4: O "CLIQUE"</h1>
-        <button onclick="alert('Eu disse no CLIQUE, não no botão!')">BOTÃO FALSO</button>
-        <p>Para avançar, você deve apenas dar um <span class="secret-click" onclick="next(5, 'QI de Gênio')">clique</span> aqui.</p>
+        <button onclick="alert('No botão não!')">BOTÃO FALSO</button>
+        <p>Avança com um <span class="secret-click" onclick="next(5, 'QI de Gênio')">clique</span> aqui.</p>
     </div>
 
     <div id="level5" class="level">
         <h1>FASE 5: TESTE DE SENHA</h1>
-        <p>Qual é a cor do cavalo branco de Napoleão?</p>
+        <p>Qual a cor do cavalo branco de Napoleão?</p>
         <input type="text" id="input5" placeholder="Digite aqui...">
         <br><button onclick="check5()">VALIDAR</button>
     </div>
 
     <div id="level6" class="level">
         <h1>FASE 6: CAMUFLAGEM</h1>
-        <p>O botão está escondido na escuridão.</p>
-        <button style="opacity: 0.01; cursor: default;" onclick="next(7, 'Visão Hacker')">BOTÃO INVISÍVEL</button>
+        <button style="opacity: 0.05;" onclick="next(7, 'Visão Hacker')">BOTÃO INVISÍVEL</button>
     </div>
 
     <div id="level7" class="level">
-        <h1>FASE 7: MATEMÁTICA TROLL</h1>
+        <h1>FASE 7: MATEMÁTICA</h1>
         <p>Quanto é 2 + 2?</p>
-        <button onclick="alert('Muito óbvio, né?')">4</button>
-        <button onclick="next(8, 'Lógica Avançada')">22</button>
+        <button onclick="alert('Óbvio demais...')">4</button>
+        <button onclick="next(8, 'Lógica')">22</button>
     </div>
 
     <div id="level8" class="level">
         <h1>FASE 8: INSTINTO</h1>
-        <p>Clique no botão VERDE para ganhar.</p>
+        <p>Clica no botão VERDE.</p>
         <button style="background:red" onclick="alert('Isso é vermelho!')">VERDE</button>
         <button style="background:var(--neon)" onclick="next(9, 'Daltônico?')">VERMELHO</button>
     </div>
 
     <div id="level9" class="level">
         <h1>FASE 9: MEDITAÇÃO</h1>
-        <p id="timer">Não toque em NADA por 5 segundos...</p>
-        <button onclick="location.reload()">EU QUERO CLICAR!</button>
+        <p id="timer">Não toques em nada por 5 seg...</p>
+        <button onclick="location.reload()">DESISTIR</button>
     </div>
 
     <div id="level10" class="level">
-        <h1>FASE 10: O GRANDE FINAL</h1>
-        <p>Tudo pronto para sua recompensa?</p>
-        <button id="last-btn">PEGAR MEU PRÊMIO</button>
+        <h1>FASE 10: O FINAL</h1>
+        <button id="last-btn">PEGAR PRÊMIO</button>
     </div>
 
     <div id="level11" class="level">
-        <h1>👑 VOCÊ ZEROU O SITE! 👑</h1>
-        <p>Parabéns! Você provou ser um mestre da paciência.</p>
-        
+        <h1>👑 MESTRE DA TROLLAGEM 👑</h1>
         <img src="https://i.postimg.cc/4N5V0x9n/1000227062.png" alt="Recompensa" class="final-img">
-        
-        <p><i>Missão Finalizada com Sucesso.</i></p>
-        <button onclick="location.reload()">JOGAR NOVAMENTE</button>
+        <br><button onclick="location.reload()">REINICIAR</button>
     </div>
 
     <script>
@@ -146,11 +137,29 @@
             if(lv === 10) setup10();
         }
 
+        // --- CORREÇÃO DA FASE 2 ---
         function setup2() {
             const b = document.getElementById('fleeing-btn');
-            const move = () => { b.style.left = Math.random()*70+'%'; b.style.top = Math.random()*70+'%'; };
-            b.onmouseover = move; b.ontouchstart = (e) => { e.preventDefault(); move(); };
-            b.onclick = () => next(3, 'Agilidade Pura');
+            let lock = false;
+
+            const fugir = () => {
+                if (lock) return;
+                // Atraso de 200ms para o telemóvel conseguir clicar antes de ele fugir
+                setTimeout(() => {
+                    if (!lock) {
+                        b.style.left = Math.random()*70 + 10 + '%';
+                        b.style.top = Math.random()*70 + 10 + '%';
+                    }
+                }, 200); 
+            };
+
+            b.onmouseover = fugir;
+            b.ontouchstart = (e) => { fugir(); }; 
+
+            b.onclick = () => {
+                lock = true;
+                next(3, 'Agilidade Pura');
+            };
         }
 
         function setup3() {
@@ -161,28 +170,26 @@
         }
 
         function check5() {
-            const val = document.getElementById('input5').value.toLowerCase();
-            if(val.includes('branco')) next(6, 'Sabichão');
-            else alert('Resposta incorreta! Pense bem...');
+            if(document.getElementById('input5').value.toLowerCase().includes('branco')) next(6, 'Sabichão');
+            else alert('Tenta de novo!');
         }
 
         function setup9() {
             let s = 5;
             waitT = setInterval(() => {
-                s--; document.getElementById('timer').innerText = "Faltam "+s+" segundos...";
+                s--; document.getElementById('timer').innerText = "Faltam "+s+" seg...";
                 if(s <= 0) { clearInterval(waitT); next(10, 'Mestre Zen'); }
             }, 1000);
         }
 
         function setup10() {
             document.getElementById('last-btn').onclick = () => {
-                alert("Verificando integridade dos arquivos...");
-                alert("Gerando certificado de paciência...");
+                alert("Verificando...");
                 next(11, 'LENDA VIVA');
             };
         }
 
-        window.oncontextmenu = (e) => { e.preventDefault(); showAchiev("Sem truques aqui!"); };
+        window.oncontextmenu = (e) => e.preventDefault();
     </script>
 </body>
 </html>
