@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SISTEMA HACKER - 15 NÍVEIS</title>
+    <title>SISTEMA HACKER ULTIMATE - 20 NÍVEIS</title>
     <style>
-        :root { --neon: #39ff14; --bg: #050505; --red: #ff3131; }
+        :root { --neon: #39ff14; --bg: #050505; }
         body {
             background: var(--bg); color: var(--neon);
             font-family: 'Courier New', monospace; margin: 0;
@@ -24,66 +24,75 @@
         #fleeing-btn { position: absolute; transition: 0.3s; z-index: 10; }
         .bar-bg { width: 100%; background: #222; height: 20px; border-radius: 10px; margin: 20px 0; }
         #bar-fill { width: 0%; height: 100%; background: var(--neon); }
-        input { background: #111; border: 1px solid var(--neon); color: var(--neon); padding: 10px; text-align: center; }
-        .final-img { max-width: 85%; border: 3px solid var(--neon); margin-top: 20px; box-shadow: 0 0 20px var(--neon); }
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+        input { background: #111; border: 1px solid var(--neon); color: var(--neon); padding: 10px; text-align: center; width: 80%; }
+        .final-img { max-width: 85%; border: 3px solid var(--neon); margin-top: 20px; box-shadow: 0 0 20px var(--neon); border-radius: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <div id="toast" style="position:fixed; top:-100px; right:20px; background:#111; border:2px solid var(--neon); padding:15px; transition:0.5s;">🏆 <span id="toast-msg"></span></div>
+    <div id="toast" style="position:fixed; top:-100px; right:20px; background:#111; border:2px solid var(--neon); padding:15px; transition:0.5s; z-index:100;">🏆 <span id="toast-msg"></span></div>
 
-    <div id="level1" class="level active"><h1>NÍVEL 1</h1><button onclick="next(2, 'Iniciou')">COMEÇAR</button></div>
-    <div id="level2" class="level"><h1>NÍVEL 2: AGILIDADE</h1><button id="fleeing-btn">ME CLIQUE</button></div>
-    <div id="level3" class="level"><h1>NÍVEL 3: ENERGIA</h1><div class="bar-bg"><div id="bar-fill"></div></div></div>
-    <div id="level4" class="level"><h1>NÍVEL 4: LÓGICA</h1><p>Dê um <span style="text-decoration:underline; cursor:pointer" onclick="next(5, 'Boa')">clique</span> aqui.</p></div>
-    <div id="level5" class="level"><h1>NÍVEL 5: CAVALO BRANCO</h1><input type="text" id="i5"><button onclick="check5()">OK</button></div>
-    <div id="level6" class="level"><h1>NÍVEL 6: INVISÍVEL</h1><button style="opacity:0.02" onclick="next(7, 'Visão X')">AQUI</button></div>
-    <div id="level7" class="level"><h1>NÍVEL 7: 2+2?</h1><button onclick="next(8, 'Gênio')">22</button><button onclick="alert('Noob')">4</button></div>
-    <div id="level8" class="level"><h1>NÍVEL 8: CORES</h1><p>Clique no VERDE</p><button style="background:red" onclick="alert('Errou')">VERDE</button><button style="background:var(--neon)" onclick="next(9, 'Certo')">AZUL</button></div>
-    <div id="level9" class="level"><h1>NÍVEL 9: PACIÊNCIA</h1><p id="timer">Espere...</p></div>
-    <div id="level10" class="level"><h1>NÍVEL 10: QUASE LÁ</h1><button onclick="next(11, 'Meio do caminho')">SÓ QUE NÃO</button></div>
+    <div id="level1" class="level active"><h1>NÍVEL 1: O INÍCIO</h1><p>Você tem coragem de enfrentar os 20 níveis?</p><button onclick="next(2, 'Começou!')">ENTRAR NO SISTEMA</button></div>
+    
+    <div id="level2" class="level"><h1>NÍVEL 2: AGILIDADE</h1><p>O botão não quer ser seu amigo.</p><button id="fleeing-btn">CLIQUE-ME!</button></div>
+    
+    <div id="level3" class="level"><h1>NÍVEL 3: ENERGIA</h1><p>A barra travou em 99%! Balance o celular para dar um tranco!</p><div class="bar-bg"><div id="bar-fill"></div></div></div>
+    
+    <div id="level4" class="level"><h1>NÍVEL 4: LÓGICA</h1><p>Muitas pessoas erram aqui. Dê um <span style="text-decoration:underline; cursor:pointer" onclick="next(5, 'QI Elevado')">clique</span> aqui para passar.</p><button onclick="alert('No botão NÃO!')">BOTÃO ERRADO</button></div>
+    
+    <div id="level5" class="level"><h1>NÍVEL 5: A SENHA</h1><p>Qual é a cor do cavalo BRANCO de Napoleão?</p><input type="text" id="i5" placeholder="Responda aqui..."><br><button onclick="check5()">CONFIRMAR</button></div>
 
-    <div id="level11" class="level">
-        <h1>NÍVEL 11: ONDE ESTÁ O CLIQUE?</h1>
-        <div class="grid" id="grid11"></div>
-    </div>
+    <div id="level6" class="level"><h1>NÍVEL 6: VISÃO X</h1><p>O botão está camuflado. Consegue achar?</p><button style="opacity:0.02" onclick="next(7, 'Olhos de Águia')">ESTOU AQUI</button></div>
+    
+    <div id="level7" class="level"><h1>NÍVEL 7: MATEMÁTICA</h1><p>Quanto é 2 + 2?</p><button onclick="next(8, 'Calculadora Humana')">22</button><button onclick="alert('Muito óbvio, né?')">4</button></div>
+    
+    <div id="level8" class="level"><h1>NÍVEL 8: INSTINTO</h1><p>Clique no botão VERDE para avançar.</p><button style="background:red" onclick="alert('Isso é vermelho!')">VERDE</button><button style="background:var(--neon)" onclick="next(9, 'Daltônico?')">VERMELHO</button></div>
+    
+    <div id="level9" class="level"><h1>NÍVEL 9: PACIÊNCIA</h1><p id="timer">Não toque em nada. Medite por 5 segundos...</p></div>
+    
+    <div id="level10" class="level"><h1>NÍVEL 10: MEIO DO CAMINHO</h1><p>Você acha que está acabando? Estamos só na metade!</p><button onclick="next(11, 'Rumo ao fim')">PROSSEGUIR</button></div>
 
-    <div id="level12" class="level">
-        <h1>NÍVEL 12: NÃO CLIQUE!</h1>
-        <button onclick="location.reload()" style="background:red">VOLTAR PRO INÍCIO</button>
-        <button onclick="next(13, 'Corajoso')">BOTÃO PEQUENO</button>
-    </div>
+    <div id="level11" class="level"><h1>NÍVEL 11: ONDE ESTÁ O CLIQUE?</h1><p>Ache o botão verdadeiro entre os impostores!</p><div class="grid" id="grid11"></div></div>
+    
+    <div id="level12" class="level"><h1>NÍVEL 12: NÃO CLIQUE!</h1><p>Cuidado com o que seus olhos veem.</p><button onclick="location.reload()" style="background:red">VOLTAR PARA O NÍVEL 1</button><br><button onclick="next(13, 'Corajoso')" style="padding:5px; font-size:10px;">botão minúsculo</button></div>
+    
+    <div id="level13" class="level"><h1>NÍVEL 13: TESTE DE ROBÔ</h1><p>Para provar que é humano, digite: <b>EU SOU UM ROBÔ</b></p><input type="text" id="i13"><br><button onclick="check13()">VALIDAR</button></div>
+    
+    <div id="level14" class="level"><h1>NÍVEL 14: O FLASH</h1><p>O botão vai aparecer por apenas 0.8 segundos. Seja rápido!</p><button id="flash-btn" style="display:none" onclick="next(15, 'Reflexo Ninja')">CLIQUE!</button></div>
+    
+    <div id="level15" class="level"><h1>NÍVEL 15: LABIRINTO</h1><p>Clique no centro sem encostar nas bordas invisíveis!</p><div style="width:250px; height:250px; border:2px dashed var(--neon); margin:auto; display:flex; align-items:center; justify-content:center;" onmouseleave="alert('Tocou na borda!')" onclick="next(16, 'Precisão Total')">CLIQUE AQUI</div></div>
 
-    <div id="level13" class="level">
-        <h1>NÍVEL 13: CAPTCHA</h1>
-        <p>Digite: <b>EU SOU UM ROBÔ</b></p>
-        <input type="text" id="i13"><br><button onclick="check13()">CONFIRMAR</button>
-    </div>
+    <div id="level16" class="level"><h1>NÍVEL 16: CARREGANDO...</h1><p>Aguarde o sistema carregar a próxima fase.</p><p id="loading-txt">0%</p></div>
+    
+    <div id="level17" class="level"><h1>NÍVEL 17: O MENTIROSO</h1><p>O botão abaixo te leva para a fase 18?</p><button onclick="next(18, 'Desconfiado')">NÃO</button><button onclick="alert('Ele mentiu!')">SIM</button></div>
+    
+    <div id="level18" class="level"><h1>NÍVEL 18: TELA DE ERRO</h1><p style="color:red">ERRO 404: FASE NÃO ENCONTRADA</p><button onclick="next(19, 'Hacker')">REPARAR SISTEMA</button></div>
+    
+    <div id="level19" class="level"><h1>NÍVEL 19: O ÚLTIMO DESAFIO</h1><p>Clique 10 vezes no botão para liberar o prêmio!</p><button id="count-btn" onclick="hit19()">CLIQUES: 0</button></div>
+    
+    <div id="level20" class="level"><h1>NÍVEL 20: O GRANDE FINAL</h1><p>Você superou tudo. Está pronto para ver sua recompensa?</p><button onclick="next(21, 'LENDA VIVA')">MOSTRAR PRÊMIO</button></div>
 
-    <div id="level14" class="level">
-        <h1>NÍVEL 14: O FLASH</h1>
-        <p>O botão vai aparecer do nada!</p>
-        <button id="flash-btn" style="display:none" onclick="next(15, 'Reflexo de Ninja')">CLIQUE AGORA!</button>
-    </div>
-
-    <div id="level15" class="level">
-        <h1>NÍVEL FINAL: LABIRINTO</h1>
-        <p>Leve o mouse/dedo até o prêmio sem soltar!</p>
-        <div style="width:200px; height:200px; border:2px dashed var(--neon); margin:auto" onmouseleave="alert('Tocou na borda!')" onclick="next(16, 'MESTRE SUPREMO')">CLIQUE NO CENTRO</div>
-    </div>
-
-    <div id="level16" class="level">
+    <div id="level21" class="level">
         <h1>👑 MESTRE DA TROLLAGEM 👑</h1>
-        <p>Você é oficialmente impossível de ser enganado!</p>
-        <img src="foto_final.png" alt="Sua Foto" class="final-img" onerror="this.src='https://www.R-X.com/erro-imagem.png'">
-        <br><button onclick="location.reload()">REINICIAR</button>
+        <p>Você zerou o site de 20 níveis!</p>
+        <img src="https://i.postimg.cc/4N5V0x9n/1000227062.png" alt="Sua Foto" class="final-img">
+        <br><button onclick="location.reload()">REINICIAR JOGO</button>
     </div>
 
     <script>
-        let cur = 1, shake = 0;
+        let cur = 1, shake = 0, clicks19 = 0;
+
+        function showAchiev(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            t.style.top = '20px';
+            if(navigator.vibrate) navigator.vibrate(100);
+            setTimeout(() => t.style.top = '-100px', 2000);
+        }
 
         function next(lv, msg) {
+            showAchiev(msg);
             document.querySelectorAll('.level').forEach(l => l.classList.remove('active'));
             document.getElementById('level'+lv).classList.add('active');
             cur = lv;
@@ -92,51 +101,72 @@
             if(lv === 9) setup9();
             if(lv === 11) setup11();
             if(lv === 14) setup14();
+            if(lv === 16) setup16();
         }
 
         function setup2() {
             const b = document.getElementById('fleeing-btn');
-            let l = false;
-            const f = () => { if(!l) setTimeout(() => { b.style.left=Math.random()*70+'%'; b.style.top=Math.random()*70+'%'; }, 400); };
-            b.ontouchstart = f; b.onmouseover = f;
-            b.onclick = () => { l=true; next(3,'Fui'); };
+            let lock = false;
+            const f = () => { if(!lock) setTimeout(() => { b.style.left=Math.random()*70+'%'; b.style.top=Math.random()*70+'%'; }, 400); };
+            b.onmouseover = f; b.ontouchstart = f;
+            b.onclick = () => { lock=true; next(3, 'Boa!'); };
         }
 
         function setup3() {
-            window.ondevicemotion = (e) => { if(Math.abs(e.accelerationIncludingGravity.x)>10) { shake+=5; document.getElementById('bar-fill').style.width=shake+'%'; if(shake>=100) next(4,'Ufa'); } };
+            window.ondevicemotion = (e) => { 
+                if(Math.abs(e.accelerationIncludingGravity.x) > 10) {
+                    shake += 5; document.getElementById('bar-fill').style.width = Math.min(shake, 100) + '%';
+                    if(shake >= 100) next(4, 'Energizado');
+                }
+            };
         }
 
-        function check5() { if(document.getElementById('i5').value.toLowerCase().includes('branco')) next(6,'Ok'); }
+        function check5() { if(document.getElementById('i5').value.toLowerCase().includes('branco')) next(6, 'Gênio'); }
 
         function setup9() {
-            let s=5;
-            let t = setInterval(() => { s--; document.getElementById('timer').innerText="Faltam "+s; if(s<=0){ clearInterval(t); next(10,'Paciência de Jó'); }}, 1000);
+            let s = 5;
+            let t = setInterval(() => {
+                s--; document.getElementById('timer').innerText = "Faltam " + s + " segundos...";
+                if(s <= 0) { clearInterval(t); next(10, 'Paciência Infinita'); }
+            }, 1000);
         }
 
         function setup11() {
-            const g = document.getElementById('grid11');
-            for(let i=0; i<20; i++) {
-                let btn = document.createElement('button');
-                btn.innerText = "NÃO";
-                btn.onclick = () => alert("Botão errado!");
-                if(i === 13) { btn.innerText="ESTE"; btn.onclick = () => next(12, 'Achou!'); }
+            const g = document.getElementById('grid11'); g.innerHTML = '';
+            for(let i=0; i<12; i++) {
+                let btn = document.createElement('button'); btn.innerText = "NÃO";
+                if(i === 7) { btn.innerText = "SIM"; btn.onclick = () => next(12, 'Achou!'); }
+                else { btn.onclick = () => alert('Errou o botão!'); }
                 g.appendChild(btn);
             }
         }
 
-        function check13() { if(document.getElementById('i13').value === "EU SOU UM ROBÔ") next(14, 'Hackeado'); }
+        function check13() { if(document.getElementById('i13').value === "EU SOU UM ROBÔ") next(14, 'Hackeado'); else alert('Escreva exatamente igual!'); }
 
         function setup14() {
-            setInterval(() => {
-                if(cur === 14) {
-                    const b = document.getElementById('flash-btn');
-                    b.style.display = 'block';
-                    b.style.position = 'absolute';
-                    b.style.left = Math.random()*80+'%'; b.style.top = Math.random()*80+'%';
-                    setTimeout(() => b.style.display='none', 800);
-                }
-            }, 2000);
+            let t = setInterval(() => {
+                if(cur !== 14) { clearInterval(t); return; }
+                const b = document.getElementById('flash-btn');
+                b.style.display = 'block'; b.style.position = 'absolute';
+                b.style.left = Math.random()*80+'%'; b.style.top = Math.random()*80+'%';
+                setTimeout(() => b.style.display = 'none', 800);
+            }, 1800);
         }
+
+        function setup16() {
+            let p = 0;
+            let t = setInterval(() => {
+                p += 5; document.getElementById('loading-txt').innerText = p + '%';
+                if(p >= 100) { clearInterval(t); next(17, 'Carregado'); }
+            }, 150);
+        }
+
+        function hit19() {
+            clicks19++; document.getElementById('count-btn').innerText = "CLIQUES: " + clicks19;
+            if(clicks19 >= 10) next(20, 'O Final');
+        }
+
+        window.oncontextmenu = (e) => e.preventDefault();
     </script>
 </body>
 </html>
