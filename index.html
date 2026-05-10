@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SISTEMA TROLL 2.0 - IFPA HACKER EDITION</title>
+    <title>SISTEMA TROLL 2.5 - IFPA EDITION</title>
     <style>
         :root { --neon: #39ff14; --bg: #050505; --red: #ff3131; }
         body { background: var(--bg); color: var(--neon); font-family: 'Courier New', monospace; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; overflow: hidden; touch-action: none; user-select: none; }
         .level { display: none; width: 90%; animation: fadeIn 0.3s; flex-direction: column; justify-content: center; align-items: center; }
         .level.active { display: flex; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        button { background: var(--neon); color: #000; border: none; padding: 12px 20px; font-weight: bold; cursor: pointer; margin: 10px; text-transform: uppercase; border-radius: 4px; z-index: 5; }
+        button { background: var(--neon); color: #000; border: none; padding: 12px 20px; font-weight: bold; cursor: pointer; margin: 10px; text-transform: uppercase; border-radius: 4px; z-index: 5; transition: transform 0.2s; }
         .bar-bg { width: 100%; background: #222; height: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid var(--neon); }
         #bar-fill { width: 0%; height: 100%; background: var(--neon); transition: 0.1s; }
         input { background: #111; border: 1px solid var(--neon); color: var(--neon); padding: 12px; text-align: center; width: 80%; font-size: 16px; margin-top: 10px; outline: none; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
         .final-img { max-width: 85%; border: 4px solid var(--neon); margin-top: 20px; box-shadow: 0 0 30px var(--neon); border-radius: 15px; display: block; margin-left: auto; margin-right: auto; }
         .secret { cursor: pointer; color: #fff; font-weight: bold; }
-        #fleeing-btn, #fleeing-check { position: absolute; z-index: 100; }
+        
+        /* AJUSTE DE VELOCIDADE AQUI: transition de 0.4s deixa o movimento humano */
+        #fleeing-btn, #fleeing-check { position: absolute; z-index: 100; transition: all 0.4s ease-out; }
+        #btn17 { transition: all 0.3s ease; }
     </style>
 </head>
 <body>
 
     <div id="level1" class="level active">
-        <h1>NÍVEL 1</h1><p>Sistema Red Team carregado. <br>Você tem coragem?</p>
-        <button onclick="next(2)">INICIAR INVASÃO</button>
+        <h1>NÍVEL 1</h1><p>Sistema Red Team carregado. <br>Versão Estável.</p>
+        <button onclick="next(2)">INICIAR</button>
     </div>
 
     <div id="level2" class="level">
-        <h1>NÍVEL 2</h1><p>A primeira falha é sua lentidão. Pegue o botão!</p>
+        <h1>NÍVEL 2</h1><p>Capture o acesso! <br>(Velocidade ajustada)</p>
         <button id="fleeing-btn">CLIQUE</button>
     </div>
 
@@ -38,7 +41,7 @@
     </div>
 
     <div id="level4" class="level">
-        <h1>NÍVEL 4</h1><p>O botão sumiu? <br>Ache a saída no <span class="secret" onclick="next(5)">texto</span>.</p>
+        <h1>NÍVEL 4</h1><p>Ache a saída no <span class="secret" onclick="next(5)">texto</span>.</p>
         <button onclick="alert('Erro fatal!')">AVANÇAR</button>
     </div>
 
@@ -48,14 +51,14 @@
     </div>
 
     <div id="level6" class="level">
-        <h1>NÍVEL 6</h1><p>O botão está em modo stealth (1% de opacidade).</p>
+        <h1>NÍVEL 6</h1><p>Botão Stealth (Quase invisível).</p>
         <button style="opacity:0.01" onclick="next(7)">ESTOU AQUI</button>
     </div>
 
     <div id="level7" class="level">
         <h1>NÍVEL 7</h1><p>2 + 2 = ?</p>
         <button onclick="next(8)">22</button>
-        <button onclick="alert('Lógica comum não funciona aqui.')">4</button>
+        <button onclick="alert('Pense como um troll!')">4</button>
     </div>
 
     <div id="level8" class="level">
@@ -65,82 +68,82 @@
     </div>
 
     <div id="level9" class="level">
-        <h1>NÍVEL 9</h1><p id="timer">Não toque na tela por 5 segundos.</p>
+        <h1>NÍVEL 9</h1><p id="timer">Aguarde 5 segundos sem tocar...</p>
     </div>
 
     <div id="level10" class="level">
         <h1>NÍVEL 10</h1><p>Deseja desistir agora?</p>
         <button onclick="next(11)">NÃO</button>
-        <button onclick="location.reload()">SIM (SAIR)</button>
+        <button onclick="location.reload()">SIM</button>
     </div>
 
     <div id="level11" class="level">
         <h1>NÍVEL <span class="secret" onclick="next(12)">11</span></h1>
-        <p>Ache o botão SIM entre os mentirosos.</p>
+        <p>Onde está o verdadeiro SIM?</p>
         <div class="grid" id="grid11"></div>
     </div>
 
     <div id="level12" class="level">
-        <h1>NÍVEL 12</h1><p>O menor caminho é o melhor.</p>
-        <button onclick="location.reload()" style="background:var(--red); width:80%">BOTÃO GIGANTE DO ERRO</button>
-        <div onclick="next(13)" style="width:5px; height:5px; background:var(--neon); margin-top:20px;"></div>
+        <h1>NÍVEL 12</h1><p>O menor caminho...</p>
+        <button onclick="location.reload()" style="background:var(--red); width:80%">BOTÃO DO ERRO</button>
+        <div onclick="next(13)" style="width:10px; height:10px; background:var(--neon); margin-top:20px; cursor:pointer;"></div>
     </div>
 
     <div id="level13" class="level">
-        <h1>NÍVEL 13</h1><p>Prove que não é um robô.</p>
-        <div id="fleeing-check" style="border:2px solid var(--neon); padding:10px; background:#000;">
+        <h1>NÍVEL 13</h1><p>Não sou um robô.</p>
+        <div id="fleeing-check" style="border:2px solid var(--neon); padding:10px; background:#000; cursor:pointer;">
             [ ] NÃO SOU UM ROBÔ
         </div>
-        <p style="font-size:10px; margin-top:100px;">(Dica: Toque duplo no fundo preto)</p>
+        <p style="font-size:10px; margin-top:120px;">(Dica: Toque duplo no fundo preto)</p>
     </div>
 
     <div id="level14" class="level">
-        <h1>NÍVEL 14</h1><p>Ataque DDOS detectado! <br>Clique no botão antes que ele suma!</p>
+        <h1>NÍVEL 14</h1><p>Clique antes que suma!</p>
         <button id="flash-btn" style="display:none" onclick="next(15)">AQUI!</button>
     </div>
 
     <div id="level15" class="level">
-        <h1>NÍVEL 15</h1><p>Teste de precisão. <br>Toque no ponto exato.</p>
+        <h1>NÍVEL 15</h1><p>Toque no ponto exato.</p>
         <div style="width:100px; height:100px; border:1px solid #444; display:flex; justify-content:center; align-items:center;" onclick="next(16)">.</div>
     </div>
 
     <div id="level16" class="level">
-        <h1>NÍVEL 16</h1><p>Baixando mais RAM...</p>
+        <h1>NÍVEL 16</h1><p>Carregando...</p>
         <div class="bar-bg"><div id="load-bar" style="width:0%; height:100%; background:var(--neon)"></div></div>
-        <h2 id="load-txt" onclick="if(this.innerText.includes('99')) next(17)">0%</h2>
+        <h2 id="load-txt" style="cursor:pointer" onclick="if(this.innerText.includes('99')) next(17)">0%</h2>
     </div>
 
     <div id="level17" class="level">
-        <h1>NÍVEL 17</h1><p>Tente clicar no botão de baixo!</p>
-        <div id="wrap17" style="height:150px">
+        <h1>NÍVEL 17</h1><p>Tente clicar no botão!</p>
+        <div style="height:150px; display:flex; align-items:center;">
             <button id="btn17" onclick="next(18)">PRÓXIMO</button>
         </div>
     </div>
 
     <div id="level18" class="level">
-        <h1>NÍVEL 18</h1><p>Qual a senha mágica?</p>
+        <h1>NÍVEL 18</h1><p>Senha mágica?</p>
         <input type="text" id="i18" placeholder="Dica: educação..."><br>
         <button onclick="check18()">ENTRAR</button>
     </div>
 
     <div id="level19" class="level">
-        <h1>NÍVEL 19</h1><p>Clique 10 vezes para o Gran Finale!</p>
+        <h1>NÍVEL 19</h1><p>Clique 10 vezes!</p>
         <button id="btn19" onclick="count19()">CLIQUES: 0</button>
     </div>
 
     <div id="level20" class="level">
-        <h1>NÍVEL 20</h1><p>Último obstáculo. <br>Feche a propaganda para ver a foto.</p>
+        <h1>NÍVEL 20</h1><p>Feche a propaganda.</p>
         <div style="width:250px; height:150px; background:#222; border:1px solid #555; position:relative;">
-            <p>VOCÊ GANHOU UM IPHONE!</p>
-            <span style="position:absolute; top:0; right:5px; color:var(--red); font-weight:bold; cursor:pointer;" onclick="next(21)">X</span>
+            <p><br>VOCÊ GANHOU!</p>
+            <span style="position:absolute; top:5px; right:10px; color:var(--red); font-weight:bold; cursor:pointer; padding:5px;" onclick="next(21)">X</span>
         </div>
     </div>
 
     <div id="level21" class="level">
-        <h1>👑 VOCÊ ZEROU O SITE! 👑</h1>
-        <p>Parabéns, mestre da informática do IFPA!</p>
+        <h1>👑 MESTRE TROLL 👑</h1>
+        <p>Acesso ao IFPA concedido!</p>
         <img src="https://i.postimg.cc/4N5V0x9n/1000227062.png" alt="Sua Foto" class="final-img">
-        <br><button onclick="location.reload()">REINICIAR TROLLAGEM</button>
+        <br><button onclick="location.reload()">REINICIAR</button>
     </div>
 
     <script>
@@ -152,7 +155,6 @@
             if(target) target.classList.add('active');
             cur = lv;
             
-            // Inicia mecânicas específicas
             if(lv === 2) setup2();
             if(lv === 3) setup3();
             if(lv === 9) setup9();
@@ -165,28 +167,37 @@
 
         function setup2() {
             const b = document.getElementById('fleeing-btn');
-            const f = () => { b.style.left=Math.random()*60+20+'%'; b.style.top=Math.random()*60+20+'%'; };
+            let lock = false;
+            const f = () => { 
+                if(!lock) {
+                    setTimeout(() => { 
+                        b.style.left=Math.random()*60+15+'%'; 
+                        b.style.top=Math.random()*60+15+'%'; 
+                    }, 400); // Tempo humano de reação
+                }
+            };
             b.onmouseover = f; b.ontouchstart = f;
-            b.onclick = () => next(3);
+            b.onclick = () => { lock = true; next(3); };
         }
 
         function setup3() {
-            window.ondevicemotion = (e) => {
-                if(cur === 3 && Math.abs(e.accelerationIncludingGravity.x) > 12) {
-                    shake += 5; document.getElementById('bar-fill').style.width = shake + '%';
+            window.onmousemove = () => { if(cur === 3) { shake += 4; document.getElementById('bar-fill').style.width = shake + '%'; if(shake >= 100) next(4); }};
+            // Para celular
+            window.addEventListener('devicemotion', (e) => {
+                if(cur === 3 && Math.abs(e.accelerationIncludingGravity.x) > 10) {
+                    shake += 8; document.getElementById('bar-fill').style.width = shake + '%';
                     if(shake >= 100) next(4);
                 }
-            };
-            window.onmousemove = () => { if(cur === 3) { shake += 2; document.getElementById('bar-fill').style.width = shake + '%'; if(shake >= 100) next(4); }};
+            });
         }
 
-        function check5() { if(document.getElementById('i5').value.toLowerCase().includes('branco')) next(6); else alert('Tente de novo...'); }
+        function check5() { if(document.getElementById('i5').value.toLowerCase().includes('branco')) next(6); else alert('Tente de novo!'); }
 
         function setup9() {
             let s = 5;
             let t = setInterval(() => {
                 if(cur !== 9) { clearInterval(t); return; }
-                s--; document.getElementById('timer').innerText = "Não toque em nada por " + s + "s";
+                s--; document.getElementById('timer').innerText = "Aguarde " + s + "s";
                 if(s <= 0) { clearInterval(t); next(10); }
             }, 1000);
         }
@@ -195,16 +206,19 @@
             const g = document.getElementById('grid11'); g.innerHTML = '';
             for(let i=0; i<12; i++) {
                 let b = document.createElement('button'); b.innerText = "SIM";
-                b.onclick = () => { alert('Incorreto!'); b.innerText = "NÃO"; };
+                b.onclick = () => { alert('Botão errado!'); b.innerText = "NÃO"; };
                 g.appendChild(b);
             }
         }
 
         function setup13() {
             const b = document.getElementById('fleeing-check');
-            const f = () => { b.style.left=Math.random()*70+'%'; b.style.top=Math.random()*70+'%'; };
+            const f = () => { b.style.left=Math.random()*60+10+'%'; b.style.top=Math.random()*60+10+'%'; };
             b.onmouseover = f; b.ontouchstart = f;
-            document.getElementById('level13').ondblclick = () => next(14);
+            document.getElementById('level13').onclick = (e) => {
+                 // Detecta clique duplo manual simplificado no fundo
+                 if (e.detail === 2) next(14);
+            };
         }
 
         function setup14() {
@@ -213,8 +227,8 @@
                 const b = document.getElementById('flash-btn');
                 b.style.display = 'block'; b.style.position = 'absolute';
                 b.style.left = Math.random()*80+'%'; b.style.top = Math.random()*80+'%';
-                setTimeout(() => b.style.display = 'none', 500);
-            }, 1200);
+                setTimeout(() => b.style.display = 'none', 600);
+            }, 1100);
         }
 
         function setup16() {
@@ -225,23 +239,22 @@
                     document.getElementById('load-txt').innerText = p + '%';
                 } else {
                     clearInterval(t);
-                    document.getElementById('load-txt').innerHTML = "99% <br> <small>(Clique no número para forçar)</small>";
+                    document.getElementById('load-txt').innerHTML = "99% <br> <small>(Toque aqui)</small>";
                 }
             }, 150);
         }
 
         function setup17() {
             const b = document.getElementById('btn17');
-            b.onmouseover = () => { b.style.transform = `translateY(${Math.random() > 0.5 ? 50 : -50}px)`; };
+            b.onmouseover = () => { b.style.transform = `translate(${Math.random()*100-50}px, ${Math.random()*100-50}px)`; };
         }
 
-        function check18() { if(document.getElementById('i18').value.toLowerCase().includes('por favor')) next(19); else alert('Faltou a palavra mágica...'); }
+        function check18() { if(document.getElementById('i18').value.toLowerCase().includes('por favor')) next(19); else alert('Faltou educação...'); }
 
         function count19() {
             c19++; 
             const b = document.getElementById('btn19');
             b.innerText = "CLIQUES: " + c19;
-            if(c19 === 9) { b.style.transform = "scale(0.1)"; b.innerText = "X"; }
             if(c19 >= 10) next(20);
         }
 
