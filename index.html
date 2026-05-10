@@ -21,6 +21,7 @@
             background: var(--neon); color: #000; border: none;
             padding: 15px 25px; font-weight: bold; cursor: pointer;
             margin: 15px; text-transform: uppercase; border-radius: 4px;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
         }
         
         #toast {
@@ -30,14 +31,14 @@
         }
         #toast.show { top: 20px; }
 
-        #fleeing-btn { position: absolute; transition: 0.2s; z-index: 10; }
+        #fleeing-btn { position: absolute; transition: 0.3s; z-index: 10; min-width: 120px; min-height: 50px; }
         .bar-bg { width: 100%; background: #222; height: 20px; border-radius: 10px; margin: 20px 0; }
         #bar-fill { width: 0%; height: 100%; background: var(--neon); }
         .secret-click { color: var(--neon); text-decoration: underline; cursor: pointer; font-weight: bold; }
         
         input[type="text"] {
             background: #111; border: 1px solid var(--neon); color: var(--neon);
-            padding: 10px; text-align: center; font-family: monospace; outline: none;
+            padding: 12px; text-align: center; font-family: monospace; outline: none; margin-bottom: 10px;
         }
 
         .final-img {
@@ -57,12 +58,13 @@
 
     <div id="level2" class="level">
         <h1>FASE 2: AGILIDADE</h1>
-        <p>Ajustado para telemóvel!</p>
-        <button id="fleeing-btn">ME CLIQUE!</button>
+        <p>Aperte o botão (agora vai!)</p>
+        <button id="fleeing-btn" style="top:50%; left:50%; transform: translate(-50%, -50%);">ME CLIQUE!</button>
     </div>
 
     <div id="level3" class="level">
         <h1>FASE 3: ENERGIA CINÉTICA</h1>
+        <p>99%... Balance o celular!</p>
         <div class="bar-bg"><div id="bar-fill"></div></div>
     </div>
 
@@ -81,7 +83,8 @@
 
     <div id="level6" class="level">
         <h1>FASE 6: CAMUFLAGEM</h1>
-        <button style="opacity: 0.05;" onclick="next(7, 'Visão Hacker')">BOTÃO INVISÍVEL</button>
+        <p>Botão invisível abaixo:</p>
+        <button style="opacity: 0.05;" onclick="next(7, 'Visão Hacker')">BOTÃO AQUI</button>
     </div>
 
     <div id="level7" class="level">
@@ -100,7 +103,7 @@
 
     <div id="level9" class="level">
         <h1>FASE 9: MEDITAÇÃO</h1>
-        <p id="timer">Não toques em nada por 5 seg...</p>
+        <p id="timer">Não toque em nada...</p>
         <button onclick="location.reload()">DESISTIR</button>
     </div>
 
@@ -137,24 +140,29 @@
             if(lv === 10) setup10();
         }
 
-        // --- CORREÇÃO DA FASE 2 ---
         function setup2() {
             const b = document.getElementById('fleeing-btn');
             let lock = false;
 
             const fugir = () => {
                 if (lock) return;
-                // Atraso de 200ms para o telemóvel conseguir clicar antes de ele fugir
+                // Aumentado para 500ms - Agora dá tempo de clicar!
                 setTimeout(() => {
                     if (!lock) {
-                        b.style.left = Math.random()*70 + 10 + '%';
-                        b.style.top = Math.random()*70 + 10 + '%';
+                        const x = Math.random() * (window.innerWidth - 120);
+                        const y = Math.random() * (window.innerHeight - 50);
+                        b.style.left = x + 'px';
+                        b.style.top = y + 'px';
+                        b.style.transform = 'none';
                     }
-                }, 200); 
+                }, 500); 
             };
 
             b.onmouseover = fugir;
-            b.ontouchstart = (e) => { fugir(); }; 
+            b.ontouchstart = (e) => { 
+                // No mobile, ele só foge se você não clicar rápido o suficiente
+                fugir(); 
+            }; 
 
             b.onclick = () => {
                 lock = true;
@@ -166,12 +174,15 @@
             const f = document.getElementById('bar-fill');
             const up = (v) => { shake += v; f.style.width = Math.min(shake, 100)+'%'; if(shake >= 100) next(4, 'Energizado'); };
             window.onmousemove = () => { if(cur==3) up(0.5); };
-            window.ondevicemotion = (e) => { if(Math.abs(e.accelerationIncludingGravity.x)>12) up(3); };
+            // Aumentada a sensibilidade do shake
+            window.addEventListener('devicemotion', (e) => { 
+                if(Math.abs(e.accelerationIncludingGravity.x) > 8) up(5); 
+            });
         }
 
         function check5() {
             if(document.getElementById('input5').value.toLowerCase().includes('branco')) next(6, 'Sabichão');
-            else alert('Tenta de novo!');
+            else alert('Tente de novo!');
         }
 
         function setup9() {
@@ -184,7 +195,7 @@
 
         function setup10() {
             document.getElementById('last-btn').onclick = () => {
-                alert("Verificando...");
+                alert("Quase lá...");
                 next(11, 'LENDA VIVA');
             };
         }
