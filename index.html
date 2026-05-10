@@ -3,184 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Desafio Impossível v1.0</title>
+    <title>Desafio Hacker: 10 Fases</title>
     <style>
-        :root { --neon-green: #39ff14; --dark-bg: #0a0a0a; }
+        :root { --neon: #39ff14; --bg: #050505; }
         body {
-            background-color: var(--dark-bg);
-            color: var(--neon-green);
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
-            touch-action: manipulation;
+            background: var(--bg); color: var(--neon);
+            font-family: 'Courier New', monospace; margin: 0;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; height: 100vh; text-align: center;
+            overflow: hidden; touch-action: none;
         }
-
-        /* Sistema de Conquistas */
-        #achievement-toast {
-            position: fixed; top: -100px; right: 20px;
-            background: #222; border: 2px solid var(--neon-green);
-            padding: 15px; border-radius: 10px; transition: 0.5s; z-index: 9999;
-        }
-        #achievement-toast.show { top: 20px; }
-
-        /* Estilo das Fases */
-        .level { display: none; width: 90%; }
+        .level { display: none; width: 90%; animation: fadeIn 0.4s; }
         .level.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         button {
-            background: var(--neon-green);
-            color: black;
-            border: none;
-            padding: 15px 30px;
-            font-weight: bold;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            margin-top: 20px;
-            text-transform: uppercase;
+            background: var(--neon); color: #000; border: none;
+            padding: 15px 25px; font-weight: bold; cursor: pointer;
+            margin: 15px; text-transform: uppercase; border-radius: 4px;
+        }
+        
+        #toast {
+            position: fixed; top: -100px; right: 20px;
+            background: #111; border: 2px solid var(--neon);
+            padding: 15px; border-radius: 8px; transition: 0.5s; z-index: 9999;
+        }
+        #toast.show { top: 20px; }
+
+        #fleeing-btn { position: absolute; transition: 0.1s; z-index: 10; }
+        .bar-bg { width: 100%; background: #222; height: 20px; border-radius: 10px; margin: 20px 0; }
+        #bar-fill { width: 0%; height: 100%; background: var(--neon); }
+        .secret-click { color: var(--neon); text-decoration: underline; cursor: pointer; font-weight: bold; }
+        
+        input[type="text"] {
+            background: #111; border: 1px solid var(--neon); color: var(--neon);
+            padding: 10px; text-align: center; font-family: monospace; outline: none;
         }
 
-        #fleeing-btn { position: absolute; transition: 0.1s; }
-
-        .progress-container {
-            width: 100%; background: #333; height: 30px; border-radius: 15px; overflow: hidden; margin-top: 20px;
+        .final-img {
+            max-width: 85%; max-height: 300px; border: 3px solid var(--neon);
+            margin-top: 20px; box-shadow: 0 0 20px var(--neon); border-radius: 10px;
         }
-        #progress-bar {
-            width: 0%; height: 100%; background: var(--neon-green); transition: 0.1s;
-        }
-
-        .hacker-text { font-size: 0.8rem; opacity: 0.7; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <div id="achievement-toast">🏆 <span id="achiev-text">Conquista!</span></div>
+    <div id="toast">🏆 <span id="toast-msg"></span></div>
 
     <div id="level1" class="level active">
-        <h1>SISTEMA DE SEGURANÇA ATIVADO</h1>
-        <p>Você precisa provar que é um "pro player" para entrar.</p>
-        <button onclick="startTroll()">CLIQUE PARA ACESSAR</button>
-        <p class="hacker-text">Detectando hardware... OK</p>
+        <h1>FASE 1: O INÍCIO</h1>
+        <p>Você foi avisado. Prossiga por sua conta e risco.</p>
+        <button onclick="next(2, 'O Começo')">ACESSAR SISTEMA</button>
     </div>
 
     <div id="level2" class="level">
         <h1>FASE 2: AGILIDADE</h1>
-        <p>Apenas um clique. É tudo o que você precisa.</p>
+        <p>Tente clicar no botão fujão!</p>
         <button id="fleeing-btn">ME CLIQUE!</button>
     </div>
 
     <div id="level3" class="level">
-        <h1>FASE 3: CARREGAMENTO</h1>
-        <p id="instruction">A barra travou em 99%!</p>
-        <p><b>PC:</b> Balance o mouse freneticamente!<br><b>Mobile:</b> Chacoalhe o celular!</p>
-        <div class="progress-container"><div id="progress-bar"></div></div>
+        <h1>FASE 3: ENERGIA CINÉTICA</h1>
+        <p>99%... Preciso de força!</p>
+        <p><small>PC: Balance o mouse | Mobile: Chacoalhe o celular!</small></p>
+        <div class="bar-bg"><div id="bar-fill"></div></div>
     </div>
 
     <div id="level4" class="level">
-        <h1>🏆 VOCÊ VENCEU! 🏆</h1>
-        <p>Você é oficialmente o mestre da paciência.</p>
-        <p>Ganhou acesso ao servidor secreto: <i>127.0.0.1:hacker_boladao</i></p>
-        <button onclick="location.reload()">REINICIAR TROLLAGEM</button>
+        <h1>FASE 4: O "CLIQUE"</h1>
+        <button onclick="alert('Eu disse no CLIQUE, não no botão!')">BOTÃO FALSO</button>
+        <p>Para avançar, você deve apenas dar um <span class="secret-click" onclick="next(5, 'QI de Gênio')">clique</span> aqui.</p>
+    </div>
+
+    <div id="level5" class="level">
+        <h1>FASE 5: TESTE DE SENHA</h1>
+        <p>Qual é a cor do cavalo branco de Napoleão?</p>
+        <input type="text" id="input5" placeholder="Digite aqui...">
+        <br><button onclick="check5()">VALIDAR</button>
+    </div>
+
+    <div id="level6" class="level">
+        <h1>FASE 6: CAMUFLAGEM</h1>
+        <p>O botão está escondido na escuridão.</p>
+        <button style="opacity: 0.01; cursor: default;" onclick="next(7, 'Visão Hacker')">BOTÃO INVISÍVEL</button>
+    </div>
+
+    <div id="level7" class="level">
+        <h1>FASE 7: MATEMÁTICA TROLL</h1>
+        <p>Quanto é 2 + 2?</p>
+        <button onclick="alert('Muito óbvio, né?')">4</button>
+        <button onclick="next(8, 'Lógica Avançada')">22</button>
+    </div>
+
+    <div id="level8" class="level">
+        <h1>FASE 8: INSTINTO</h1>
+        <p>Clique no botão VERDE para ganhar.</p>
+        <button style="background:red" onclick="alert('Isso é vermelho!')">VERDE</button>
+        <button style="background:var(--neon)" onclick="next(9, 'Daltônico?')">VERMELHO</button>
+    </div>
+
+    <div id="level9" class="level">
+        <h1>FASE 9: MEDITAÇÃO</h1>
+        <p id="timer">Não toque em NADA por 5 segundos...</p>
+        <button onclick="location.reload()">EU QUERO CLICAR!</button>
+    </div>
+
+    <div id="level10" class="level">
+        <h1>FASE 10: O GRANDE FINAL</h1>
+        <p>Tudo pronto para sua recompensa?</p>
+        <button id="last-btn">PEGAR MEU PRÊMIO</button>
+    </div>
+
+    <div id="level11" class="level">
+        <h1>👑 VOCÊ ZEROU O SITE! 👑</h1>
+        <p>Parabéns! Você provou ser um mestre da paciência.</p>
+        
+        <img src="https://i.postimg.cc/4N5V0x9n/1000227062.png" alt="Recompensa" class="final-img">
+        
+        <p><i>Missão Finalizada com Sucesso.</i></p>
+        <button onclick="location.reload()">JOGAR NOVAMENTE</button>
     </div>
 
     <script>
-        let currentLevel = 1;
-        let shakeProgress = 0;
-        let lastX, lastY, lastZ;
+        let cur = 1, shake = 0, waitT;
 
-        // --- SISTEMA DE CONQUISTAS ---
-        function unlockAchievement(name) {
-            const toast = document.getElementById('achievement-toast');
-            const text = document.getElementById('achiev-text');
-            text.innerText = name;
-            toast.classList.add('show');
-            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-            
-            setTimeout(() => toast.classList.remove('show'), 3000);
+        function showAchiev(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            t.classList.add('show');
+            if(navigator.vibrate) navigator.vibrate(100);
+            setTimeout(() => t.classList.remove('show'), 3000);
         }
 
-        function changeLevel(lv) {
-            document.querySelectorAll('.level').forEach(el => el.classList.remove('active'));
-            document.getElementById(`level${lv}`).classList.add('active');
-            currentLevel = lv;
+        function next(lv, msg) {
+            showAchiev(msg);
+            document.querySelectorAll('.level').forEach(l => l.classList.remove('active'));
+            document.getElementById('level'+lv).classList.add('active');
+            cur = lv;
+            if(lv === 2) setup2();
+            if(lv === 3) setup3();
+            if(lv === 9) setup9();
+            if(lv === 10) setup10();
         }
 
-        // --- LÓGICA FASE 1 ---
-        function startTroll() {
-            alert("Acesso negado: Nível de fofura insuficiente.");
-            alert("Tentando novamente...");
-            alert("Erro 404: O botão de login fugiu.");
-            unlockAchievement("O Inocente");
-            changeLevel(2);
-            setupLevel2();
+        function setup2() {
+            const b = document.getElementById('fleeing-btn');
+            const move = () => { b.style.left = Math.random()*70+'%'; b.style.top = Math.random()*70+'%'; };
+            b.onmouseover = move; b.ontouchstart = (e) => { e.preventDefault(); move(); };
+            b.onclick = () => next(3, 'Agilidade Pura');
         }
 
-        // --- LÓGICA FASE 2 ---
-        function setupLevel2() {
-            const btn = document.getElementById('fleeing-btn');
-            let escapes = 0;
+        function setup3() {
+            const f = document.getElementById('bar-fill');
+            const up = (v) => { shake += v; f.style.width = Math.min(shake, 100)+'%'; if(shake >= 100) next(4, 'Energizado'); };
+            window.onmousemove = () => { if(cur==3) up(0.5); };
+            window.ondevicemotion = (e) => { if(Math.abs(e.accelerationIncludingGravity.x)>12) up(3); };
+        }
 
-            const fugir = () => {
-                const x = Math.random() * (window.innerWidth - btn.clientWidth);
-                const y = Math.random() * (window.innerHeight - btn.clientHeight);
-                btn.style.left = x + 'px';
-                btn.style.top = y + 'px';
-                escapes++;
-                if (escapes === 10) unlockAchievement("Vítima do Sistema");
+        function check5() {
+            const val = document.getElementById('input5').value.toLowerCase();
+            if(val.includes('branco')) next(6, 'Sabichão');
+            else alert('Resposta incorreta! Pense bem...');
+        }
+
+        function setup9() {
+            let s = 5;
+            waitT = setInterval(() => {
+                s--; document.getElementById('timer').innerText = "Faltam "+s+" segundos...";
+                if(s <= 0) { clearInterval(waitT); next(10, 'Mestre Zen'); }
+            }, 1000);
+        }
+
+        function setup10() {
+            document.getElementById('last-btn').onclick = () => {
+                alert("Verificando integridade dos arquivos...");
+                alert("Gerando certificado de paciência...");
+                next(11, 'LENDA VIVA');
             };
-
-            btn.addEventListener('mouseover', fugir); // PC
-            btn.addEventListener('touchstart', (e) => { e.preventDefault(); fugir(); }); // Mobile
-
-            btn.onclick = () => {
-                unlockAchievement("Dedo de Ouro");
-                changeLevel(3);
-                setupLevel3();
-            };
         }
 
-        // --- LÓGICA FASE 3 ---
-        function setupLevel3() {
-            const bar = document.getElementById('progress-bar');
-            
-            // Lógica para PC (Movimento do Mouse)
-            window.addEventListener('mousemove', () => {
-                if (currentLevel === 3) updateBar(0.5);
-            });
-
-            // Lógica para Mobile (Acelerômetro)
-            if (window.DeviceMotionEvent) {
-                window.addEventListener('devicemotion', (event) => {
-                    let acceleration = event.accelerationIncludingGravity;
-                    let deltaX = Math.abs(acceleration.x - lastX);
-                    if (deltaX > 15) updateBar(2);
-                    lastX = acceleration.x;
-                });
-            }
-
-            function updateBar(amount) {
-                shakeProgress += amount;
-                if (shakeProgress > 100) shakeProgress = 100;
-                bar.style.width = shakeProgress + '%';
-                
-                if (shakeProgress >= 100) {
-                    unlockAchievement("Gerador de Energia Humano");
-                    setTimeout(() => changeLevel(4), 1000);
-                }
-            }
-        }
-
-        // Anti-Trapaça: Botão direito bloqueado
-        window.oncontextmenu = (e) => {
-            e.preventDefault();
-            unlockAchievement("Tentativa de Hack kkk");
-        };
-
+        window.oncontextmenu = (e) => { e.preventDefault(); showAchiev("Sem truques aqui!"); };
     </script>
 </body>
 </html>
